@@ -1250,7 +1250,7 @@ Main:AddToggle("ESP Player",espplyer,function(a)
 	end)
 
 Main:AddButton("no fall damage", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/REWzaKunGz1/main/no%20ee'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/EEWREE/main/no%20fall'))()
 end)
 
 Main:AddButton("Inf Jumps", function()
@@ -1868,7 +1868,7 @@ Combat:AddButton("Striped Donut", function()
 end)
 
 Misc:AddButton("Time scp", function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/REWzaKunGz1/main/Timescp'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/EEWREE/main/Timescp'))()
 end)
 
 Misc:AddButton("Rejoin Server", function()

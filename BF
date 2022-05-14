@@ -6886,7 +6886,7 @@ end)
     end)
     
     Misc:AddButton("fly Mobile",function()
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/REWzaKunGz1/main/fly'))()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/EEWREE/main/fly'))()
     end)
     
     Misc:AddToggle("Auto Click",autoclick,function(value)

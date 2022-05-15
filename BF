@@ -6587,7 +6587,18 @@ end)
       Misc:AddButton("Kill you",function()
         game:GetService("Players").LocalPlayer.Character.LowerTorso:Destroy()
     end)
-    
+
+Misc:AddButton("Clone Your Self",function(value)
+    game.Players.LocalPlayer.Character.Archivable = true
+game.Players.LocalPlayer.Character.Animate.Disabled = true
+local clonec =  game.Players.LocalPlayer.Character:Clone()
+clonec.Parent = workspace
+clonec.Name = "CLONE"
+clonec.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,2)
+game.Players.LocalPlayer.Character = clonec
+clonec.Animate.Disabled = false
+end)
+
     Misc:AddSeperator("Codes")
     
     local x2Code = {

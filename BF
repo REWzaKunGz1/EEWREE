@@ -6587,9 +6587,12 @@ end)
         game:GetService("Players").LocalPlayer.Character.LowerTorso:Destroy()
     end)
 
-Misc:AddButton("Clone+xray",function(value)
+Misc:AddButton("TimeStop",function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/EEWREE/main/TimeStop'))()
+end)
 
+Misc:AddButton("Clone+xray",function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/EEWREE/main/clone%2Bxray'))()
 end)
 
     Misc:AddSeperator("Codes")

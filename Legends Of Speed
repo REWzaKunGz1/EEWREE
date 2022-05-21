@@ -1037,12 +1037,11 @@ MODILEMAGE.Size = UDim2.new(0, 25, 0, 25)
 MODILEMAGE.Image = "http://www.roblox.com/asset/?id=6031075938"
 wait(1)
    
-    local SOMEXHUB = library:AddWindow("Pado Hub",Enum.KeyCode.RightControl)
+    local SOMEXHUB = library:AddWindow("Pado Hub | LS",Enum.KeyCode.RightControl)
     
     local Main = SOMEXHUB:AddTab("Auto Farm","6026568198")
     local Combat = SOMEXHUB:AddTab("Teleport","6035190846")
-    local Map = SOMEXHUB:AddTab("Map","6031075938")
-
+    
     Main:AddSeperator("Legends Of Speed")
     
     Time = Main:AddLabel("Server Time")
@@ -1274,9 +1273,3 @@ end)
 Combat:AddButton("Teleport To Best egg", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4542.74854, 75.1472473, 6406.27246, 0.227699727, 1.13029879e-08, -0.973731399, 3.16385034e-08, 1, 1.90063361e-08, 0.973731399, -3.5135141e-08, 0.227699727)
 end)
-
-Map:AddSeperator("Legends Of Speed")
-
-Map:AddSeperator("Blox Fruits")
-
-Map:AddSeperator("SCP 3008")

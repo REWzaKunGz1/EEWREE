@@ -1174,8 +1174,7 @@ wait(1)
     local esp = SOMEXHUB:AddTab("ESP","7251993295")
     local Combat = SOMEXHUB:AddTab("Teleport","6035190846")
     local Misc = SOMEXHUB:AddTab("Misc","6034509993")
-    local Map = SOMEXHUB:AddTab("Map","6031075938")
-
+    
     Main:AddSeperator("Settings")
     
     Time = Main:AddLabel("Server Time")
@@ -1878,9 +1877,3 @@ end)
 Misc:AddButton("Server Hop", function()
      Hop()
 end)
-
-Map:AddSeperator("Legends Of Speed")
-
-Map:AddSeperator("Blox Fruits")
-
-Map:AddSeperator("SCP 3008")

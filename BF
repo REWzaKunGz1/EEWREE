@@ -2225,7 +2225,6 @@ wait(1)
     local DevilFruit = PadoUi:AddTab("Devil Fruit","7044233235")
     local Shop = PadoUi:AddTab("Shop","6031265976")
     local Misc = PadoUi:AddTab("Misc","6034509993")
-    local Map = PadoUi:AddTab("Map","6031075938")
     --------------------------------------------------------------------
     Main:AddSeperator("Settings")
     
@@ -2362,7 +2361,7 @@ end)
                                                 EquipWeapon(_G.SelectWeapon)
                                                 AutoHaki()                                            
                                                 PosMon = v.HumanoidRootPart.CFrame
-                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(5,20,5))
+                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(5,15,5))
                                                 v.HumanoidRootPart.CanCollide = false
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.Head.CanCollide = false
@@ -2381,11 +2380,11 @@ end)
                         else
                             StartMagnet = false
                             if game:GetService("ReplicatedStorage"):FindFirstChild(Mon) then
-                                topos(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+                                topos(game:GetService("ReplicatedStorage"):FindFirstChild(Mon).HumanoidRootPart.CFrame * CFrame.new(5,15,7))
                             else
                                 if (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 15 then
                                     if PosMon ~= nil then
-                                        topos(PosMon * CFrame.new(5,20,5))
+                                        topos(PosMon * CFrame.new(5,15,5))
                                     else
                                         if OldPos ~= nil then
                                             topos(OldPos.Position)
@@ -6588,15 +6587,9 @@ end)
         game:GetService("Players").LocalPlayer.Character.LowerTorso:Destroy()
     end)
 
-Misc:AddButton("Clone Your Self",function(value)
-    game.Players.LocalPlayer.Character.Archivable = true
-game.Players.LocalPlayer.Character.Animate.Disabled = true
-local clonec =  game.Players.LocalPlayer.Character:Clone()
-clonec.Parent = workspace
-clonec.Name = "CLONE"
-clonec.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,2)
-game.Players.LocalPlayer.Character = clonec
-clonec.Animate.Disabled = false
+Misc:AddButton("Clone+xray",function(value)
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/EEWREE/main/TimeStop'))()
+
 end)
 
     Misc:AddSeperator("Codes")
@@ -7035,12 +7028,6 @@ end)
             end)
         end
     end)
-    
-Map:AddSeperator("Legends Of Speed")
-
-Map:AddSeperator("Blox Fruits")
-
-Map:AddSeperator("SCP 3008")
 
 _G.FastAttack = false
 end

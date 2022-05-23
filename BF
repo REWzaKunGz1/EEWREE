@@ -2246,6 +2246,8 @@ wait(1)
         end
     end)
     
+    Main:AddLabel("discord https://discord.gg/pRBhtemr")
+    
     Main:AddToggle("Auto Set Spawn Points",true,function(value)
         _G.AutoSetSpawn = value
     end)
@@ -6402,7 +6404,7 @@ end)
 		game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 	end)
     
-    Misc:AddSeperator("Server to discord")
+    Misc:AddSeperator("Server")
     
     Misc:AddButton("Rejoin Server",function()
         game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
@@ -6410,10 +6412,6 @@ end)
     
      Misc:AddButton("Server Hop",function()
         Hop()
-    end)
-    
-    Misc:AddButton("discord",function()
-         setclipboard("https://discord.gg/zPPv6jFF")
     end)
     
     Misc:AddButton("Destroy Ui",function()

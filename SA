@@ -1,4 +1,4 @@
-    
+  
     game:GetService("Players").LocalPlayer.Idled:connect(function()
         game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
         wait(1)
@@ -20,6 +20,12 @@
             ui:Destroy()
         end
     end
+    
+           game:GetService("StarterGui"):SetCore("SendNotification", { 
+    Title = "Pado x HUB";
+    Text = "Loading...";
+    Icon = "rbxassetid://8825667942"})
+Duration = 14;
     
     local UserInputService = game:GetService("UserInputService")
     local TweenService = game:GetService("TweenService")
@@ -992,12 +998,49 @@
     end
     
 
-
+local SOMEXHUBMODILE = Instance.new("ScreenGui")
+local MODILEGUISOMEXHUB = Instance.new("TextButton")
+local MODILEGUISOMEXHUBHUI = Instance.new("UICorner")
+local MODILEMAGE = Instance.new("ImageLabel")
+SOMEXHUBMODILE.Name = "SOMEXHUBMODILE"
+SOMEXHUBMODILE.Parent = game.CoreGui
+SOMEXHUBMODILE.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+MODILEGUISOMEXHUB.Name = "MODILEGUISOMEXHUB"
+MODILEGUISOMEXHUB.Parent = SOMEXHUBMODILE
+MODILEGUISOMEXHUB.BackgroundColor3 = Color3.fromRGB(255,0,0)
+MODILEGUISOMEXHUB.BackgroundTransparency = 0.1
+MODILEGUISOMEXHUB.BorderSizePixel = 0
+MODILEGUISOMEXHUB.Position = UDim2.new(0, 0, 0.491228074, 0)
+MODILEGUISOMEXHUB.Size = UDim2.new(0, 50, 0, 50)
+MODILEGUISOMEXHUB.Font = Enum.Font.SourceSans
+MODILEGUISOMEXHUB.Text = ""
+MODILEGUISOMEXHUB.TextColor3 = Color3.fromRGB(0, 0, 0)
+MODILEGUISOMEXHUB.TextSize = 14.000
+MODILEGUISOMEXHUB.Draggable = true
+MODILEGUISOMEXHUB.MouseButton1Click:Connect(function()
+      game:GetService("VirtualInputManager"):SendKeyEvent(true,305,false,game)
+      game:GetService("VirtualInputManager"):SendKeyEvent(false,305,false,game)
+end)
+do
+if game:GetService("CoreGui"):FindFirstChild("DinoUI") then
+end
+end
+MODILEGUISOMEXHUBHUI.Name = "MODILEGUISOMEXHUBHUI"
+MODILEGUISOMEXHUBHUI.Parent = MODILEGUISOMEXHUB
+MODILEMAGE.Name = "MODILEMAGE"
+MODILEMAGE.Parent = MODILEGUISOMEXHUB
+MODILEMAGE.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+MODILEMAGE.BackgroundTransparency = 1.000
+MODILEMAGE.BorderSizePixel = 0
+MODILEMAGE.Position = UDim2.new(0.234619886, 0, 0.239034846, 0)
+MODILEMAGE.Size = UDim2.new(0, 25, 0, 25)
+MODILEMAGE.Image = "http://www.roblox.com/asset/?id=6031075938"
+wait(1)
    
     local SOMEXHUB = library:AddWindow("Pado Hub | SA",Enum.KeyCode.RightControl)
     
     local Main = SOMEXHUB:AddTab("Main","6026568198")
-    local Combat = SOMEXHUB:AddTab("Player","6026568198")
+    local Combat = SOMEXHUB:AddTab("Teleport","6026568198")
     
     Time = Main:AddLabel("Server Time")
 
@@ -1164,3 +1207,18 @@ local vim = game:service("VirtualInputManager")
 vim:SendKeyEvent(false, "R", false, game)
 end)
 end)
+
+
+Combat:AddButton("Teleport lobby", function()
+             game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1343.7042236328125, 603.614013671875, -490.9136657714844)
+end)
+
+Combat:AddButton("Teleport item Room", function()
+             game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-273.9040222167969, 459.9142150878906, -1482.7977294921875)
+end)
+
+
+Combat:AddButton("Teleport Rank sell", function()
+             game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1342.004150390625, 581.2296142578125, -554.0390014648438)
+end)
+

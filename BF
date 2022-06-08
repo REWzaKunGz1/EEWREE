@@ -2363,7 +2363,7 @@ end)
                                                 EquipWeapon(_G.SelectWeapon)
                                                 AutoHaki()                                            
                                                 PosMon = v.HumanoidRootPart.CFrame
-                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(5,15,5))
+                                                topos(v.HumanoidRootPart.CFrame * CFrame.new(5,15,7))
                                                 v.HumanoidRootPart.CanCollide = false
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.Head.CanCollide = false
@@ -3716,7 +3716,7 @@ end)
                                         v.Head.CanCollide = false 
                                         StartMagnetBoneMon = true
                                         PosMonBone = v.HumanoidRootPart.CFrame
-                                        topos(v.HumanoidRootPart.CFrame * CFrame.new(5,10,7))
+                                        topos(v.HumanoidRootPart.CFrame * CFrame.new(5,15,7))
                                         game:GetService("VirtualUser"):CaptureController()
                                         game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
                                     until not _G.Auto_Bone or not v.Parent or v.Humanoid.Health <= 0
@@ -3798,7 +3798,7 @@ end)
         pcall(function()
             while wait() do
                 if _G.AutoObservation then
-                    if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
+                    if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 5000 then
                         game:GetService("StarterGui"):SetCore("SendNotification", {
                             Icon = "rbxassetid://0";
                             Title = "Observation", 

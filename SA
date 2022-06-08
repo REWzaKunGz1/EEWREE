@@ -997,6 +997,113 @@ Duration = 14;
         return uitab
     end
     
+    function Hop()
+        local PlaceID = game.PlaceId
+        local AllIDs = {}
+        local foundAnything = ""
+        local actualHour = os.date("!*t").hour
+        local Deleted = false
+        function TPReturner()
+            local Site;
+            if foundAnything == "" then
+                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+            else
+                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+            end
+            local ID = ""
+            if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+                foundAnything = Site.nextPageCursor
+            end
+            local num = 0;
+            for i,v in pairs(Site.data) do
+                local Possible = true
+                ID = tostring(v.id)
+                if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                    for _,Existing in pairs(AllIDs) do
+                        if num ~= 0 then
+                            if ID == tostring(Existing) then
+                                Possible = false
+                            end
+                        else
+                            if tonumber(actualHour) ~= tonumber(Existing) then
+                                local delFile = pcall(function()
+                                    AllIDs = {}
+                                    table.insert(AllIDs, actualHour)
+                                end)
+                            end
+                        end
+                        num = num + 1
+                    end
+                    if Possible == true then
+                        table.insert(AllIDs, ID)
+                        wait()
+                        pcall(function()
+                            wait()
+                            game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                        end)
+                        wait(4)
+                    end
+                end
+            end
+        end
+        function Teleport() 
+            while wait() do
+                pcall(function()
+                    TPReturner()
+                    if foundAnything ~= "" then
+                        TPReturner()
+                    end
+                end)
+            end
+        end
+        Teleport()
+    end                   
+    
+  function isnil(thing)
+		return (thing == nil)
+	end
+	local function round(n)
+		return math.floor(tonumber(n) + 0.5)
+	end
+	Number = math.random(1, 1000000)
+	function UpdatePlayerChams()
+		for i,v in pairs(game:GetService'Players':GetChildren()) do
+			pcall(function()
+				if not isnil(v.Character) then
+					if ESPPlayer then
+						if not isnil(v.Character.Head) and not v.Character.Head:FindFirstChild('NameEsp'..Number) then
+							local bill = Instance.new('BillboardGui',v.Character.Head)
+							bill.Name = 'NameEsp'..Number
+							bill.ExtentsOffset = Vector3.new(0, 1, 0)
+							bill.Size = UDim2.new(1,200,1,30)
+							bill.Adornee = v.Character.Head
+							bill.AlwaysOnTop = true
+							local name = Instance.new('TextLabel',bill)
+							name.Font = "GothamBold"
+							name.FontSize = "Size14"
+							name.TextWrapped = true
+							name.Text = (v.Name ..' \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' M')
+							name.Size = UDim2.new(1,0,1,0)
+							name.TextYAlignment = 'Top'
+							name.BackgroundTransparency = 1
+							name.TextStrokeTransparency = 0.5
+							if v.Team == game.Players.LocalPlayer.Team then
+								name.TextColor3 = Color3.new(0,255,0)
+							else
+								name.TextColor3 = Color3.new(255,0,0)
+							end
+						else
+							v.Character.Head['NameEsp'..Number].TextLabel.Text = (v.Name ..' | '.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Character.Head.Position).Magnitude/3) ..' M\nHealth : ' .. round(v.Character.Humanoid.Health*100/v.Character.Humanoid.MaxHealth) .. '%')
+						end
+					else
+						if v.Character.Head:FindFirstChild('NameEsp'..Number) then
+							v.Character.Head:FindFirstChild('NameEsp'..Number):Destroy()
+						end
+					end
+				end
+			end)
+       end
+end
 
 local SOMEXHUBMODILE = Instance.new("ScreenGui")
 local MODILEGUISOMEXHUB = Instance.new("TextButton")
@@ -1037,11 +1144,12 @@ MODILEMAGE.Size = UDim2.new(0, 25, 0, 25)
 MODILEMAGE.Image = "http://www.roblox.com/asset/?id=6031075938"
 wait(1)
    
-    local SOMEXHUB = library:AddWindow("Pado Hub | SA",Enum.KeyCode.RightControl)
+    local PadoUi = library:AddWindow("Pado Hub | SA",Enum.KeyCode.RightControl)
     
-    local Main = SOMEXHUB:AddTab("Main","6026568198")
-    local Combat = SOMEXHUB:AddTab("Teleport","6026568198")
-    
+    local Main = PadoUi:AddTab("Main","6026568198")
+    local Combat = PadoUi:AddTab("Teleport","6026568198")
+    local Misc = PadoUi:AddTab("Misc","6034509993")
+	
     Time = Main:AddLabel("Server Time")
 
      Main:AddLabel("[best game] Stands Awakening")
@@ -1061,64 +1169,6 @@ wait(1)
             end)
         end
     end)
-    
-Main:AddButton("Bring All Items", true, function()
-   bringAllItems()
-end)  
-
-Main:AddButton("Collect All Items", true, function()
-   local oldPos = game.Players.LocalPlayer.Character:GetPrimaryPartCFrame()
-   for i,v in pairs(workspace:GetChildren()) do
-       if v:IsA("Tool") then
-           local thing = v:FindFirstChild("Handle")
-           if thing then
-             game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(thing.CFrame)
-           end
-           wait()
-       end
-   end
-   game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(oldPos)
-end)
-
-function getAllItems()
-       for i,v in pairs(workspace:GetChildren()) do
-       if v:IsA("Tool") then
-           local thing = v:FindFirstChild("Handle")
-           if thing then
-             game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(thing.CFrame)
-           end
-           wait()
-       end
-   end
-end
-
-function bringAllItems()
-   for i,v in pairs(workspace:GetChildren()) do
-       if v:IsA("Tool") then
-           local thing = v:FindFirstChild("Handle")
-           if thing then
-             thing.CFrame = game.Players.LocalPlayer.Character:GetPrimaryPartCFrame()
-           end
-           wait()
-       end
-   end
-end
-
-local autofarm = {}
-autofarm.enabled = false
-autofarm.oldpos = nil
-
-Main:AddToggle("Autofarm Items", false, function()
-   autofarm.enabled = true
-   autofarm.oldpos = game.Players.LocalPlayer.Character:GetPrimaryPartCFrame()
-   while autofarm.enabled do
-       if not autofarm.enabled then break end
-       getAllItems()
-   end
-end, function()
-   autofarm.enabled = false
-   game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(autofarm.oldpos)
-end)
 
 Main:AddButton("Anti Afk", function()
 wait(0.5)local ba=Instance.new("ScreenGui")
@@ -1126,88 +1176,21 @@ local ca=Instance.new("TextLabel")local da=Instance.new("Frame")
 local _b=Instance.new("TextLabel")local ab=Instance.new("TextLabel")ba.Parent=game.CoreGui
 ba.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;ca.Parent=ba;ca.Active=true
 ca.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ca.Draggable=true
-ca.Position=UDim2.new(0.698610067,0,0.098096624,0)ca.Size=UDim2.new(0,370,0,52)
+ca.Position=UDim2.new(0.698610067,0,0.098096624,0)ca.Size=UDim2.new(0,50,0,50)
 ca.Font=Enum.Font.SourceSansSemibold;ca.Text="Anti AFK"ca.TextColor3=Color3.new(0,1,1)
-ca.TextSize=22;da.Parent=ca
+ca.TextSize=20;da.Parent=ca
 da.BackgroundColor3=Color3.new(0.196078,0.196078,0.196078)da.Position=UDim2.new(0,0,1.0192306,0)
-da.Size=UDim2.new(0,370,0,107)_b.Parent=da
+da.Size=UDim2.new(0,10,0,10)_b.Parent=da
 _b.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)_b.Position=UDim2.new(0,0,0.800455689,0)
-_b.Size=UDim2.new(0,370,0,21)_b.Font=Enum.Font.Arial;_b.Text="Pado Hub "
+_b.Size=UDim2.new(0,10,0,10)_b.Font=Enum.Font.Arial;_b.Text=""
 _b.TextColor3=Color3.new(0,1,1)_b.TextSize=20;ab.Parent=da
 ab.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ab.Position=UDim2.new(0,0,0.158377,0)
-ab.Size=UDim2.new(0,370,0,44)ab.Font=Enum.Font.ArialBold;ab.Text="Status: Active"
+ab.Size=UDim2.new(0,10,0,10)ab.Font=Enum.Font.ArialBold;ab.Text=""
 ab.TextColor3=Color3.new(0,1,1)ab.TextSize=20;local bb=game:service'VirtualUser'
 game:service'Players'.LocalPlayer.Idled:connect(function()
 bb:CaptureController()bb:ClickButton2(Vector2.new())
 ab.Text="Roblox tried to kick u but i kicked him instead"wait(2)ab.Text="Status : Active"end)
 end)
-
-Main:AddButton("TimeStop", function()
-setting = settings().Network
-local Effect = Instance.new("ColorCorrectionEffect")
-Effect.Parent = game.Lighting
-Effect.Saturation = -1
-Effect.Brightness = 0
-Effect.Contrast = 0
-toggle = false
-
-Effect.Enabled = false
-function onKeyPress(inputObject, gameProcessedEvent)
-	if inputObject.KeyCode == Enum.KeyCode.R then	
-		if toggle == false then
-			setting.IncomingReplicationLag = 1000
-			Effect.Enabled = true
-			toggle = true
-		else
-			setting.IncomingReplicationLag = 0
-			Effect.Enabled = false
-			toggle = false
-		end
-
-	end
-end
-
-game:GetService("UserInputService").InputBegan:connect(onKeyPress)
-
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local TextButton = Instance.new("TextButton")
-
-
-ScreenGui.Parent = game.CoreGui
-
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.new(255,250,0)
-Frame.BorderColor3 = Color3.new(255,250,0)
-Frame.Position = UDim2.new(0.001,0,0.2)
-Frame.Size = UDim2.new(0.08,0.08,0.08)
-Frame.Active = true
-Frame.Draggable = true
-
-TextButton.Parent = Frame
-TextButton.BackgroundColor3 = Color3.new(0,0,0)
-TextButton.BackgroundTransparency = 0.0000000001
-TextButton.Position = UDim2.new(0.103524067, 0, 0.200333327, 0)
-TextButton.TextColor3 = Color3.new(1,1,1)
-TextButton.Size = UDim2.new(0.8,0.9,0.6)
-TextButton.Font = Enum.Font.SourceSansLight
-TextButton.FontSize = Enum.FontSize.Size14
-TextButton.Text = "Time Stop"
-TextButton.TextScaled = true
-TextButton.TextSize = 8
-TextButton.TextWrapped = true
-
-run = false
-TextButton.MouseButton1Click:connect(function()
-run = not run
-local vim = game:service("VirtualInputManager")
-vim:SendKeyEvent(true, "R", false, game)
-wait()
-local vim = game:service("VirtualInputManager")
-vim:SendKeyEvent(false, "R", false, game)
-end)
-end)
-
 
 Combat:AddButton("Teleport lobby", function()
              game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1343.7042236328125, 603.614013671875, -490.9136657714844)
@@ -1217,8 +1200,24 @@ Combat:AddButton("Teleport item Room", function()
              game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-273.9040222167969, 459.9142150878906, -1482.7977294921875)
 end)
 
-
 Combat:AddButton("Teleport Rank sell", function()
              game.Players.localPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1342.004150390625, 581.2296142578125, -554.0390014648438)
 end)
 
+    Misc:AddButton("fly Mobile",function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/REWzaKunGz1/EEWREE/main/fly'))()
+    end)
+
+    Misc:AddButton("Rejoin Server",function()
+        game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+    end)
+    
+     Misc:AddButton("Server Hop",function()
+        Hop()
+    end)
+    
+    Misc:AddButton("Destroy Ui",function()
+        if game.CoreGui:FindFirstChild("UlLib") then
+            game.CoreGui:FindFirstChild("UlLib"):Destroy()
+        end
+    end)

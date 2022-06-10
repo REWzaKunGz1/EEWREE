@@ -2853,7 +2853,7 @@ end)
                                                 if v.Humanoid.Health <= HealthMs then
                                                     AutoHaki()
                                                     EquipWeapon(game:GetService("Players").LocalPlayer.Data.DevilFruit.Value)
-                                                    topos(v.HumanoidRootPart.CFrame * CFrame.new(5,35,5))
+                                                    topos(v.HumanoidRootPart.CFrame * CFrame.new(5,40,5))
                                                     v.HumanoidRootPart.CanCollide = false
                                                     PosMonMasteryFruit = v.HumanoidRootPart.CFrame
                                                     v.Humanoid.WalkSpeed = 0
@@ -2863,7 +2863,7 @@ end)
                                                     UseSkill = false 
                                                     AutoHaki()
                                                     EquipWeapon(_G.SelectWeapon)
-                                                    topos(v.HumanoidRootPart.CFrame * CFrame.new(5,35,5))
+                                                    topos(v.HumanoidRootPart.CFrame * CFrame.new(5,40,5))
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                                     PosMonMasteryFruit = v.HumanoidRootPart.CFrame

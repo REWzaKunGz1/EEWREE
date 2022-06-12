@@ -2246,7 +2246,7 @@ wait(1)
         end
     end)
     
-    Main:AddLabel("discord https://discord.gg/pRBhtemr")
+    Main:AddLabel("discord Padohub")
     
     Main:AddToggle("Auto Set Spawn Points",true,function(value)
         _G.AutoSetSpawn = value

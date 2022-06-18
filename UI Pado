@@ -31,13 +31,13 @@ _G.SectionTextColor = Color3.fromRGB(150, 150, 150)
 _G.SectionOn = Color3.fromRGB(0, 250, 0)
 
 
-function Blacklib:Window()
+function PadoUI:Window()
     local osfunc = {}
     local titlefunc = {}
     local pingfunc = {}
     local timefunc = {}
     local Points = Instance.new("Frame")
-    local BlackTrap = Instance.new("ScreenGui")
+    local PadoHub = Instance.new("ScreenGui")
     local PlayTime = Instance.new("TextLabel")
     local PlayTimeCorner = Instance.new("UICorner")
     local WindowFrame = Instance.new("Frame")
@@ -52,9 +52,9 @@ function Blacklib:Window()
     local CloseButton = Instance.new("TextButton")
     
     -- Propertiers --
-    BlackTrap.Name = "BlackTrap"
-    BlackTrap.Parent = game.CoreGui
-    BlackTrap.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    PadoHub.Name = "BlackTrap"
+    PadoHub.Parent = game.CoreGui
+    PadoHub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     
     Points.Name = "Points"
     Points.Parent = BlackTrap
